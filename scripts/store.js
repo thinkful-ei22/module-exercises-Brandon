@@ -30,11 +30,16 @@ const store = (function () {
     
   function findAndUpdateName (id, newName){
     try{
+      console.log('`findAndUpdateName` ran');
+      //console.log (newName);
       Item.validateName(newName);
-      let item = this.items.findById(id);
-      console.log(item);
+      //console.log(this.items.find(item => item.id ===id));
+      //   this.items.findById(id).name = item.name;
+
+      let item = this.items.find(item => item.id ===id);
+      //console.log(item);
       item.name = newName;
-      this.items.findById(id).name = item.name;
+      console.log(item.name);
       
     }
     catch (e) {
@@ -55,8 +60,16 @@ const store = (function () {
     // return this.items;
   }
   
+  function toggleCheckedFilter (){
+    this.hideCheckedItems = !this.hideCheckedItems;
+  }
+
+  function setSearchTerm (val){
+    this.searchTerm = val;
+  }
+
   return{ 
-    items: items, addItem, findAndToggleChecked, findAndUpdateName, findAndDelete,
+    items: items, addItem, findAndToggleChecked, findAndUpdateName, findAndDelete,toggleCheckedFilter, setSearchTerm
   };
 }());
 
