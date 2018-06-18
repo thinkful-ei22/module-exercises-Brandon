@@ -24,14 +24,18 @@ const store = (function () {
   }
    
   function findAndToggleChecked (id) {
-    this.findById(id);
-    this.checked = !this.checked;
+    let foundItem = this.items.find(item => item.id === id);
+    foundItem.checked = !foundItem.checked;
   }
     
   function findAndUpdateName (id, newName){
     try{
       Item.validateName(newName);
-      this.findById(id).name =newName;
+      let item = this.items.findById(id);
+      console.log(item);
+      item.name = newName;
+      this.items.findById(id).name = item.name;
+      
     }
     catch (e) {
       console.log('Cannot update name: {error.message}');
